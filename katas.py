@@ -1,4 +1,5 @@
 from functools import reduce
+from src import Arbol
 
 # 1- Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. 
 #    Los espacios no deben ser considerados.
@@ -542,10 +543,120 @@ else:
      
 # 31- Crea una función que solicite al usuario ingresar una lista de nombres y luego solicite un nombre para buscar en esa lista. Si el nombre está en 
 #    la lista, se imprime un mensaje indicando que fue encontrado, de lo contrario, se lanza una excepción.
- 
+
+# No vamos a tener en cuenta los nombres compuestos
+
+def encuentra_nombre():
+    """Función que solicita al usuario introducir:
+        1- Una lista de nombres separadas por espacioes
+        2- Un nombre a buscar en la lista.
+
+    Busca el nombre introducido en la lista. 
+    No se van a tener en cuenta los nombres compuestos tipo Jose María. Se van a tratar como dos nombres separados.
+       
+    Raises:
+        ValueError: Devuelve error si el nombre no está en la lista
+    """
+    lista_nombre = input("Introduce una lista de nombres, separados por un espacio: ").split()
+    nombre_a_buscar = input("Introduce el nombre a buscar: ").lower()
+
+    lista_nombre = [nombre.lower() for nombre in lista_nombre]
+
+    if nombre_a_buscar in lista_nombre:
+        print(f"Se ha encontrado el nombre {nombre_a_buscar} en la lista")
+    else:
+        raise ValueError(f"El nombre {nombre_a_buscar} no en la lista")
+
+try:
+    encuentra_nombre()
+except ValueError as e:
+        print(e)
+
+
 # 32- Crea una función que tome un nombre completo y una lista de empleados, busque el nombre completo en la lista y devuelve el puesto 
 #     del empleado si está en la lista, de lo contrario, devuelve un mensaje indicando que la persona no trabaja aquí.
- 
+
+#Entiendo como puesto del empleado, la posición que ocupa en la lista, contando la primera posición como 1 y no como 0
+def encuentra_empleado(lista_empleados, nombre_empleado):
+    """
+    Función que busca un empleado en la lista de empleados
+
+    Args:
+        lista_empleados (list): lista de empleados
+        nombre_empleado (str): nombre del empleado a buscar
+
+    Returns:
+        int, str: Si se encuentra el empleado en la lista, devuelve un int con el puesto que ocupa en la lista. Sino, devuelve un mensaje indicando que no está en la lista
+    """
+    lista_empleados = [nombre.lower() for nombre in lista_empleados]
+    nombre_empleado = nombre_empleado.lower()
+
+    if nombre_empleado in lista_empleados:
+        return lista_empleados.index(nombre_empleado)+1
+    
+    return f"No se ha encontrado al empleado {nombre_empleado}"
+    
+lista_empleados = ["Don Quijote", "Sancho Panza", "Dulcinea del Toboso", "Rocinante"]
+nombre_empleado = "Sancho Panza"
+
+posicion = encuentra_empleado(lista_empleados, nombre_empleado)
+
+if (type(posicion) == int):
+    print (f"El empleado {nombre_empleado} está en el puesto {posicion}")
+else:
+    print (posicion)
+
+
+lista_empleados = ["Don Quijote", "Sancho Panza", "Dulcinea del Toboso", "Rocinante"]
+nombre_empleado = "Sancho panza"
+
+posicion = encuentra_empleado(lista_empleados, nombre_empleado)
+if (type(posicion) == int):
+    print (f"El empleado {nombre_empleado} está en el puesto {posicion}")
+else:
+    print (posicion)
+
+lista_empleados = ["Don Quijote", "Sancho Panza", "Dulcinea del Toboso", "Rocinante"]
+nombre_empleado = "Sancho panzo"
+
+posicion = encuentra_empleado(lista_empleados, nombre_empleado)
+if (type(posicion) == int):
+    print (f"El empleado {nombre_empleado} está en el puesto {posicion}")
+else:
+    print (posicion)
  
 # 33- Crea una función lambda que sume elementos correspondientes de dos listas dadas.
- 
+suma_listas = lambda lista1, lista2: [valor_lista1 + valor_lista2 for valor_lista1, valor_lista2 in zip(lista1, lista2)]
+
+lista1 = [2,2,3,4,5]
+lista2 = [5,4,3,2,2]
+
+print (suma_listas(lista1, lista2))
+
+
+# 34- Crea la clase Arbol define un árbol genérico con un tronco y ramas como atributos. Los métodos disponibles son: 
+# crecer_tronco, nueva_rama, crecer_ramas, quitar_rama, info_arbol.
+#  El objetivo es implementar estos métodos para manipular la estructura del árbol
+
+# 1. Crear un árbol.
+arbol = Arbol.Arbol()
+
+# 2. Hacer crecer el tronco del árbol una unidad.
+arbol.crecer_tronco()
+
+# 3. Añadir una nueva rama al árbol.
+arbol.nueva_rama()
+
+# 4. Hacer crecer todas las ramas del árbol una unidad.
+arbol.crecer_ramas()
+
+# 5. Añadir dos nuevas ramas al árbol.
+# La función nueva_rama podría tener un parámetros indicando el número de ramas a crecer, que por defecto sea 1.
+arbol.nueva_rama()
+arbol.nueva_rama()
+
+# 6. Retirar la rama situada en la posición 2.
+arbol.quitar_rama(2)
+
+# 7. Obtener información sobre el árbol
+arbol.info_arbol()

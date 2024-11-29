@@ -1,9 +1,17 @@
-from functools import reduce
+from src import UsuarioBanco
 
-# Crea una función lambda que sume elementos correspondientes de dos listas dadas.
-suma_listas = lambda lista1, lista2: lista1+lista2
+try:
+    usuario1 = UsuarioBanco.UsuarioBanco("Alicia", 100, False)
+    usuario2 = UsuarioBanco.UsuarioBanco("Bob", 50, True)
 
-lista1 = [1,2,3,4]
-lista2 = [1,2,3,4]
+    usuario2.agregar_dinero(20)
+    usuario2.imprimir_saldo()
 
-print(suma_listas(lista1,lista2))
+    usuario2.transferir_dinero(50, usuario1)
+    usuario2.imprimir_saldo()
+    usuario1.imprimir_saldo()
+
+    usuario1.retirar_dinero(50)
+    usuario1.imprimir_saldo()
+except ValueError as e:
+    print(e)
