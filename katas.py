@@ -1,5 +1,7 @@
 from functools import reduce
 from src import Arbol
+from src import UsuarioBanco
+import math
 
 # 1- Escribe una función que reciba una cadena de texto como parámetro y devuelva un diccionario con las frecuencias de cada letra en la cadena. 
 #    Los espacios no deben ser considerados.
@@ -660,3 +662,95 @@ arbol.quitar_rama(2)
 
 # 7. Obtener información sobre el árbol
 arbol.info_arbol()
+
+
+#36 Crea la clase UsuarioBanco ,representa a un usuario de un banco con su nombre, saldo y si tiene o no cuenta corriente. 
+#   Proporciona métodos para realizar operaciones como retirar dinero, transferir dinero desde otro usuario y agregar dinero al saldo
+
+try:
+    usuario1 = UsuarioBanco.UsuarioBanco("Alicia", 100, False)
+    usuario2 = UsuarioBanco.UsuarioBanco("Bob", 50, True)
+
+    usuario2.agregar_dinero(20)
+    usuario2.imprimir_saldo()
+
+    usuario2.transferir_dinero(50, usuario1)
+    usuario2.imprimir_saldo()
+    usuario1.imprimir_saldo()
+
+    usuario1.retirar_dinero(50)
+    usuario1.imprimir_saldo()
+except ValueError as e:
+    print(e)
+
+
+# 37- Crea una función llamada procesar_texto que procesa un texto según la opción especificada: 
+#     contar_palabras, reemplazar_palabras , eliminar_palabra. 
+#     Estas opciones son otras funciones que tenemos que definir primero y llamar dentro de la función procesar_texto .
+
+
+# 38- Genera un programa que nos diga si es de noche, de día o tarde según la hora proporcionada por el usuario.
+
+
+# 39- Escribe un programa que determine qué calificación en texto tiene un alumno en base a su calificación numérica. Las reglas de calificación son:
+#   - 0 - 69 insuficiente
+#   - 70 - 79 bien
+#   - 80 - 89 muy bien
+#   - 90 - 100 excelente
+def determina_calificacion():
+    nota = int(input("Introduce la nota del alumno: "))
+
+    if 0 <= nota <= 69:
+        print ("La calificación es de insuficiente")
+    elif 70 <= nota <= 79:
+        print ("La calificación es de bien")
+    elif 80 <= nota <= 89:
+        print ("La calificación es de muy bien")
+    elif 90 <= nota <= 100:
+        print ("La calificación es de excelente")
+    else:
+        raise ValueError("La nota debe estar entre 0 y 100")
+
+try:
+    determina_calificacion()        
+except ValueError as e:
+    print (e)
+
+
+# 40- Escribe una función que tome dos parámetros: 
+#     figura (una cadena que puede ser "rectangulo" , "circulo" o  "triangulo" ) y datos (una tupla con los datos necesarios para calcular el área de la figura).
+def calcula_area(figura, medidas):
+    area = 0
+
+    if figura.lower() == "rectangulo":
+    #Área rectángulo= base * altura
+        base, altura = medidas
+        area = base * altura
+    elif figura.lower() == "triangulo":
+    #Área triángul0 = (base * altura) / 2
+        base, altura = medidas
+        area = (base * altura) / 2
+    elif figura.lower() == "circulo":
+    #Área círculo = pi*radio2
+        radio = medidas[0]
+        area = math.pi * radio**2
+    else:
+        raise ValueError(f"Figura {figura} no contemplada para el cálculo")
+    
+    return area
+
+print(calcula_area("rectangulo", (5, 3)))  
+print(calcula_area("circulo", (4,)))       
+print(calcula_area("triangulo", (6, 2)))  
+    
+
+#41- En este ejercicio, se te pedirá que escribas un programa en Python que utilice condicionales para determinar el
+#    monto final de una compra en una tienda en línea, después de aplicar un descuento. 
+#    El programa debe hacer lo siguiente:
+# 1. Solicita al usuario que ingrese el precio original de un artículo.
+# 2. Pregunta al usuario si tiene un cupón de descuento (respuesta sí o no).
+# 3. Si el usuario responde que sí, solicita que ingrese el valor del cupón de descuento.
+# 4. Aplica el descuento al precio original del artículo, siempre y cuando el valor del cupón sea válido (es decir, mayor
+# a cero). Por ejemplo, descuento de 15€. 
+# 5. Muestra el precio final de la compra, teniendo en cuenta el descuento aplicado o sin él. 
+# 6. Recuerda utilizar estructuras de control de flujo como if, elif y else para llevar a cabo estas acciones en tu programa de Python.

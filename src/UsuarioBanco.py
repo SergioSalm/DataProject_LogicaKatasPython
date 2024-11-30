@@ -11,14 +11,17 @@ class UsuarioBanco:
 
     def retirar_dinero(self, saldo):
         if self.tiene_cuenta_corriente == False:
-            raise "No tiene cuenta bancaria"
+            raise ValueError (f"El usuario {self.usuario} no puede retirar dinero ya que no tiene cuenta bancaria")
         
         self.saldo -= saldo
         print(f"{self.usuario} retira {saldo}")
 
     def transferir_dinero(self, saldo, usuario_destino):
-        if self.tiene_cuenta_corriente == False or usuario_destino.tiene_cuenta_corriente == False:
-            raise "No tiene cuenta bancaria"
+        if self.tiene_cuenta_corriente == False:
+            raise ValueError(f"El usuario {self.usuario} no puede transferir dinero ya que no tiene cuenta bancaria")
+        
+        if usuario_destino.tiene_cuenta_corriente == False:
+             raise ValueError(f"El usuario {usuario_destino.usuario} no puede recibir dinero ya que no tiene cuenta bancaria")
         
         usuario_destino.saldo += saldo
         self.saldo -= saldo
@@ -26,7 +29,7 @@ class UsuarioBanco:
 
     def agregar_dinero(self, saldo):
         if self.tiene_cuenta_corriente == False:
-            raise ValueError("No tiene cuenta bancaria")
+            raise ValueError(f"El usuario {self.usuario} no puede agregar dinero ya que no tiene cuenta bancaria")
         
         self.saldo += saldo
         print(f"{self.usuario} ingresa {saldo}")
