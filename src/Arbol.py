@@ -4,19 +4,14 @@ class Arbol:
     El árbol unicamente puede tener un tronco cuya longitud puede aumentar.
     El árbol puede tener una o varías ramas, y cada rama va a tener una longitud propia.
     El atributo rama va a se una lista que contenga una  sublista. Esta sublista tendrá el número de rama y su longitud.
-    De esta manera, si borramos la rama 2, la rama 3 y superiores, continuan teniendo su mismo número de rama.
+    De esta manera, si borramos la rama 2, la rama 3 y superiores, conservan el número de rama, y si se busca la rama 2, ésta ya no existe.
     """
 
     def __init__(self):
         """
-        Constructo de la clase Árbol
-        
-        Args:
-            tronco (int): Número de troncos del árbol
-            ramas (list): Número de ramas. Contiene una lista indicando el número de rama y su longitud.
+            Constructor de la clase Árbol
         """
-
-        
+                        
         self.tronco = 1
         self.ramas = []
         self.numero_ramas = 0
