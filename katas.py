@@ -48,7 +48,7 @@ lista_numero =[1,2,3,4,5,6,7,8,9,10]
 
 def dobla_valor(numero):
     """
-    Función que devuelve el doble del número que viene por parámentro
+    Función que devuelve el doble del número que recibe por parámentro
     
     Args:
         numero (int o float): número que vamos a doblar
@@ -67,7 +67,7 @@ print(f"Lista doblada:  {list(map(dobla_valor, lista_numero))}")
 def encuentra_palabra_objetivo(lista_palabras, palabra_objetivo):
     """
     Esta función recibe una lista de palabras y un texto a buscar dentro de las palabras de la lista. 
-    Devuelve una lista con todas las palabras que tienen la palabra objetivo.
+    Devuelve una lista con todas las palabras que contienen la palabra objetivo.
     Args:
         lista_palabras (list): lista de palabras
         palabra_objetivo (string): palabra a buscar
@@ -164,7 +164,7 @@ print(f"El estado es {resultado[1]}, con una media de {resultado[0]}")
 # 6- Escribe una función que calcule el factorial de un número de manera recursiva.
 def factorial(numero):
     """
-    Función que calcula el factorial de un número de forma recursiva
+    Función que calcula el factorial del número que recibimos por parámetro de forma recursiva
 
     Args:
         numero (int): número a calcular
@@ -185,7 +185,8 @@ print(f"El factorial de {numero} es: {resultado}")
 # 7- Genera una función que convierta una lista de tuplas a una lista de strings. Usa la función map()
 def tuplas_a_lista(tupla_a_convertir):
     """
-    Función que convierte una lista de tuplas a una lista de strings
+    Función que convierte una lista de tuplas a una lista de strings. 
+    Lo que está como tupla, pasa a ser string.
 
     Args:
         tupla_a_convertir (tuple): tupla a convertir
@@ -199,7 +200,8 @@ def tuplas_a_lista(tupla_a_convertir):
 
 tupla = [(1,3),("Manzana", "Roma"), (1,"Madrid"), (2,"Barcelona")]
 lista = list(map(tuplas_a_lista, tupla))
-print(lista)
+print(f"Lista de tuplas: {tupla}")
+print(f"Lista de strings {lista}")
 
  
 # 8- Escribe un programa que pida al usuario dos números e intente dividirlos. 
@@ -222,7 +224,7 @@ except ValueError:
 # La lista de mascotas a excluir es ["Mapache", "Tigre", "Serpiente Pitón", "Cocodrilo", "Oso"].Usa la función filter()
 def excluir_animales_prohibidos_ESP(mascota):
     """
-    Función que excluye los animales considerados prohibidos de una lista
+    Función que excluye los animales considerados prohibidos de la lista recibida por parámetro
 
     Args:
         mascota (string): mascota para revisar si está prohibida
@@ -263,10 +265,10 @@ def calcula_promedio(lista_numeros):
     return sum(lista_numeros) / len(lista_numeros)
 
 try:
-    lista_a_calcular = []
+    lista_a_calcular = [5,10,15]
     print(f"El promedio de los valores de la lísta es de: {calcula_promedio(lista_a_calcular)}")
 
-    lista_a_calcular = [5,10,15]
+    lista_a_calcular = []
     print(f"El promedio de los valores de la lísta es de: {calcula_promedio(lista_a_calcular)}")
 except Excepciones.ListaVacia as e:
     print(f"Se ha producido un error. {e}")
@@ -300,7 +302,6 @@ def longitud_palabra(frase):
     """
     palabras = frase.split()
     
-    #lista_longitud = list(map(str, palabras), map(len, palabras))
     lista_longitud = list(map(lambda palabra: (palabra, len(palabra)), palabras))
         
     return lista_longitud
@@ -394,7 +395,7 @@ cadena = "Tenía en su casa una ama que pasaba de los cuarenta, y una sobrina qu
 longitud = 6
 
 print(f"Frase a calcular: {cadena}")
-print(f"Las palabras que tienen una longitud supuerior a {longitud} caracteres, son: {filtra_palabras_longitud(cadena, longitud)}")
+print(f"Las palabras que tienen una longitud superior a {longitud} caracteres, son: {filtra_palabras_longitud(cadena, longitud)}")
 
 
 # 17- Crea una función que tome una lista de dígitos y devuelva el número correspondiente. 
@@ -443,11 +444,10 @@ print(f"Números impares de la lista: {funcion_calcula_numero_impar(lista_numero
 
 
 # 20- Para una lista con elementos tipo integer y string obtén una nueva lista sólo con los valores int. Usa la función filter()
-funcion_filtrar_int = lambda lista: [componente for componente in lista if type(componente) == int]
-
 lista = [1,"2",3,"casa", 5, "3434"]
 print(f"Lista de valores a calcular: {lista}")
-print(f"Valores de tipo int de la lista: {funcion_filtrar_int(lista)}")
+lista_int = list(filter(lambda componente: type(componente) == int, lista))
+print(f"Valores de tipo int de la lista: {lista_int}")
 
 
 # 21- Crea una función que calcule el cubo de un número dado mediante una función lambda
@@ -568,7 +568,7 @@ print(f"Lista de valores a buscar: {lista_valores}")
 
 duplicado = encuentra_primer_duplicado(lista_valores)
 if duplicado:
-    print(f"El valor duplicado es {duplicado}")    
+    print(f"El valor duplicado es '{duplicado}'")    
 else:
     print(f"La lista no tiene valores duplicados")
 
@@ -576,7 +576,7 @@ lista_valores_1 = ["No", "huye", "el", "que", "se", "retira"]
 print(f"Lista de valores a buscar: {lista_valores_1}")
 duplicado = encuentra_primer_duplicado(lista_valores_1)
 if duplicado:
-    print(f"El valor duplicado es {duplicado}")    
+    print(f"El valor duplicado es '{duplicado}'")    
 else:
     print(f"La lista no tiene valores duplicados")
 
@@ -584,7 +584,7 @@ lista_valores_2 = ["Y", "así", "del", "poco", "dormir", "y", "del", "mucho", "l
 print(f"Lista de valores a buscar: {lista_valores_2}")
 duplicado = encuentra_primer_duplicado(lista_valores_2)
 if duplicado:
-    print(f"El valor duplicado es {duplicado}")    
+    print(f"El valor duplicado es '{duplicado}'")    
 else:
     print(f"La lista no tiene valores duplicados")
 

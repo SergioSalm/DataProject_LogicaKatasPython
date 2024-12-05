@@ -37,7 +37,7 @@ class UsuarioBanco:
              raise Excepciones.NoCuentaBancaria(f"El usuario {usuario_destino.usuario} no puede recibir dinero ya que no tiene cuenta bancaria")
         
         if self.saldo < saldo_a_transferir:
-            raise Excepciones.SinDineroEnBanco(f"El usuario {self.usuario} no puede transferir {saldo_a_transferir}. Solamente le queda {self.saldo}")
+            raise Excepciones.SinDineroEnBanco(f"El usuario {self.usuario} no puede transferir {saldo_a_transferir}. Solamente le queda un saldo {self.saldo}")
         
         usuario_destino.saldo += saldo_a_transferir
         self.saldo -= saldo_a_transferir
