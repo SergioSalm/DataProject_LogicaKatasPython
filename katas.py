@@ -46,20 +46,8 @@ print(f"Frecuencua de la cadena: {frecuencia_letras(cadena_texto)}")
 # 2- Dada una lista de números, obtén una nueva lista con el doble de cada valor. Usa la función map()
 lista_numero =[1,2,3,4,5,6,7,8,9,10]
 
-def dobla_valor(numero):
-    """
-    Función que devuelve el doble del número que recibe por parámentro
-    
-    Args:
-        numero (int o float): número que vamos a doblar
-
-    Returns:
-        int o float: valor doble del número que recibimos por parámetro
-    """
-    return numero * 2
-
 print(f"Lista original: {lista_numero}")
-print(f"Lista doblada:  {list(map(dobla_valor, lista_numero))}")
+print(f"Lista doblada:  {list(map(lambda numero: numero * 2, lista_numero))}")
 
 
 # 3- Escribe una función que tome una lista de palabras y una palabra objetivo como parámetros. 
@@ -329,7 +317,7 @@ def letras_mayusculas_minusculas(caracteres):
     #Quitamos espacios y símbolos
     for letra in caracteres:
         if letra.isalpha and letra not in exclusion:
-            set_letras_unicas.add(letra)
+            set_letras_unicas.add(letra.lower())
 
     lista_caracteres = list(map(lambda letra: (letra.upper(), letra.lower()), set_letras_unicas))
     
@@ -341,26 +329,11 @@ print(letras_mayusculas_minusculas(frase))
 
 
 # 14- Crea una función que retorne las palabras de una lista de palabras que comience con una letra en especifico. Usa la función filter()
-def filtrar_palabras(lista_palabras, letra_filtro):
-    """
-    Función que devuelve las palabras de una lista de palabras que comiencen con una letra en especifico
-
-    Args:
-        lista_palabras (list): lista de palabras
-        letra_filtro (str): letra a filtrar
-
-    Returns:
-        list: devuelve una lista con las palabras de la lista_palabras que empiezan con la letra_filtro
-    """
-    lista_filtrada = list(filter(lambda palabra: palabra[0] == letra_filtro , lista_palabras))
-
-    return lista_filtrada
-
-
-lista_palabras = ["uno", "dos", "torpedo", "guante", "firulais"]
+lista_palabras = ["uno", "dos", "torpedo", "guante", "firulais", "fandango"]
 letra_filtro = "f"
 print (f"Lista de palabras: {lista_palabras}")
-print (f"Palabaras que empiezan por {letra_filtro}: {filtrar_palabras(lista_palabras, letra_filtro)}")
+lista_palabras_filtradas = list(filter(lambda palabra: palabra[0] == letra_filtro , lista_palabras))
+print (f"Palabaras que empiezan por {letra_filtro}: {lista_palabras_filtradas}")
  
 
 # 15- Crea una función lambda que  sume 3 a cada número de una lista dada.
@@ -400,20 +373,10 @@ print(f"Las palabras que tienen una longitud superior a {longitud} caracteres, s
 
 # 17- Crea una función que tome una lista de dígitos y devuelva el número correspondiente. 
 #     Por ejemplo, 5,7,2 corresponde al número quinientos setenta y dos 572. Usa la función reduce()
-def convertir_lista_a_numero(lista_numeros):
-    """
-    Función que a partir de una lista que contiene números, devuelve el número correspondiente
-    Args:
-        lista_numeros (list): lista de números
-
-    Returns:
-        int: número correspondiente a partir de la lista
-    """
-    return int(reduce(lambda num1,num2: str(num1)+str(num2), lista_numeros))
-
 lista_numeros = [2,4,56,3]
 print(f"La lista de números es: {lista_numeros}")
-print(f"Número correspondiente: {convertir_lista_a_numero(lista_numeros)}")
+numero = int(reduce(lambda num1,num2: str(num1)+str(num2), lista_numeros))
+print(f"Número correspondiente: {numero}")
 
 
 # 18- Escribe un programa en Python que cree una lista de diccionarios que contenga información de estudiantes (nombre, edad, calificación) 
@@ -432,8 +395,7 @@ for estudiante in estudiantes:
 
 estudiantes_de_90 = list(filter(lambda estudiante: estudiante["calificacion"] >= 90 , estudiantes))
 print("Estudiantes con calificación superor a 90:")
-for estudiante in estudiantes_de_90:
-    print(estudiante)
+print(estudiantes_de_90)
 
 # 19- Crea una función lambda que filtre los números impares de una lista dada.
 funcion_calcula_numero_impar = lambda lista_numeros: [numero for numero in lista_numeros if numero % 2 != 0]
@@ -1002,17 +964,17 @@ def calcula_area(figura, medidas):
     if figura.lower() == "rectangulo":
     #Área rectángulo= base * altura
         base, altura = medidas
-        area = base * altura
+        area = round(base * altura, 2)
         print(f"El area del {figura}, con base {base} y altura {altura} es de {area}")
     elif figura.lower() == "triangulo":
     #Área triángul0 = (base * altura) / 2
         base, altura = medidas
-        area = (base * altura) / 2
+        area = round((base * altura) / 2, 2)
         print(f"El area del {figura}, con base {base} y altura {altura} es de {area}")
     elif figura.lower() == "circulo":
     #Área círculo = pi*radio2
         radio = medidas[0]
-        area = math.pi * radio**2
+        area = round(math.pi * radio**2, 2)
         print(f"El area del {figura}, con radio {radio} es de {area}")
     else:
         raise ValueError(f"Figura {figura} no contemplada para el cálculo")
@@ -1052,10 +1014,15 @@ try:
 
         if 0 < descuento < precio_articulo:
             precio_articulo -= descuento 
+            print(f"El precio final del artículo es de {precio_articulo}")
         else:
             print("Descuento no válido")
-
-    print(f"El precio final del artículo es de {precio_articulo}")
+    elif tiene_descuento == "no":
+        print("El artículo no tiene descuentos.")
+        print(f"El precio final del artículo es de {precio_articulo}")
+    else:
+        print("El valor introducido no es correcto. Solamente puede ser sí o no.")
+    
 except ValueError:
     print("Solamente se pueden introducir números")
     
